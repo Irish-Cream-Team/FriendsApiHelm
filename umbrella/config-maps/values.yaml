@@ -1,0 +1,34 @@
+configmaps:
+  - name: friends
+    data:
+      ELASTIC_APM_ACTIVE: "true"
+      ELASTIC_APM_SERVER_URL: "http://apm:8200"
+      FRIENDS_API_AUDIENCE_ID: OlSPkCn9SsW17R_y5Q4fPuov8mP6nN
+      GROUP_SERVICE_URL: http://group-service:3000/
+      INCOMING_SERVICES: '[{"target":"http://friends-api:3000","audience":"OlSPkCn9SsW17R_y5Q4fPuov8mP6nN","useBearerToken":true,"routes":[{"route":"/api/users/:id/groups","method":"get","allowedScopes":["read"],"useAuthentication":true},{"route":"/api/users/*","method":"get","useAuthentication":false},{"route":"/api/*","method":"get","allowedScopes":["read"],"useAuthentication":true},{"route":"/api/*","method":"all","allowedScopes":["write"],"useAuthentication":true},{"route":"/*","method":"get","useAuthentication":false}]}]'
+      KARTOFFEL_REAL_URL: "http://kartoffel-master.eastus.cloudapp.azure.com:3001"
+      KARTOFFEL_URL: http://outgoing-proxy-service:3000/kartoffel
+      MONGO_URI: mongodb://mongodb-service:27017/devDB
+      OUTGOING_SERVICES: '[{"route":"/kartoffel/*","pathRewrite":{"^/kartoffel":""},"target":"http://kartoffel-master.eastus.cloudapp.azure.com:3001","audience":"kartoffel"}]'
+      PORT: '3000'
+      SPIKE_CLIENT_ID: hvOItpV~jv0ZiIqEAxLrYx8sxvDHmPfNiw9wtOSz
+      SPIKE_CLIENT_SECRET: e2ar_pCJc27RdT4dFw~6ONYJ~5gVgsWfh9cjuUJ0YyVL0simY3VwehAYwe0qPB_uUIjRXFKzHJUqW7A_KM1DBpPYtQQ183JcdLFr
+      SPIKE_PUBLIC_KEY_FULL_PATH: ./certificate/publicKey.pem
+      SPIKE_REDIS_HOST: redis://redis
+      SPIKE_URL: https://51.144.178.121:1337/oauth2/token
+      SPIKE_USER_SERVICE_REDIS_KEY_NAME: kartoffel
+      TOKEN_GRANT_TYPE: client_credentials
+      USE_REDIS: "true"
+      USER_HEADER: X-User-ID
+      USER_SERVICE_URL: http://user-service:3000/
+
+  - name: outgoing-proxy-service
+    data:
+      MODE: outgoing
+
+  - name: incoming-proxy-service
+    data:
+      MODE: incoming
+
+
+
